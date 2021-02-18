@@ -1,0 +1,32 @@
+{%extends 'main/base.html'%}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content  %}
+Информация про группы
+  <div>
+        <p>
+            <br>Название предмета : {{ group.course }} </br>
+            <br>Имя преподователя : {{group.teacher}}<br>
+            <p>Students:
+            {% for student in group.students.all %}
+                <p><b>{{ student.first_name }} {{ student.last_name }} ({{ student.email }})</b>
+            {%endfor%}
+
+            {% if user.is_authenticated %}
+
+
+            {% endif %}
+        </p>
+      <br> <a href="{% url 'edit_group' group_id=group.group_id %}">
+      <button type="submit" class="btn btn-outline-primary">Редактировать</button></a>
+      <a href="{% url 'delete_group' group_id=group.group_id %}">
+                    <button type="submit" class="btn btn-outline-primary">Удалить</button>
+                </a>
+      <a href="{% url 'group'  %}">
+                    <button type="submit" class="btn btn-outline-primary">Вернуться к группам</button>
+                </a>
+    </div>
+{% endblock %}

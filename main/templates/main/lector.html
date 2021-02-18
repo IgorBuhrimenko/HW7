@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content%}
-<h1> Преподователи</h1>
-{% for lecturer in lecturers %}
-    <div>
-        <b>{{ lecturer.first_name }} {{ lecturer.last_name}}</b>, {{ lecturer.email }}
-    </div>
+<h1> Преподователи  </h1>
+
+ {% for lecturer in lecturers %}
+<li>
+            <a href="{% url 'show_lector' lecturer_id=lecturer.lecturer_id %}">
+                {{ lecturer.last_name}}  {{lecturer.first_name }}
+            </a>
+</li>
     {% endfor %}
+
 
 {% endblock %}

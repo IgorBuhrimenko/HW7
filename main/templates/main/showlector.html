@@ -1,0 +1,29 @@
+{%extends 'main/base.html'%}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content  %}
+Информация про предователя
+  <div>
+        <p>
+            <br> Фамилия: {{ lector.last_name }} </br>
+            <br>Имя : {{ lector.first_name }}.</br>
+            <br> email : {{ lector.email }} </br>
+            {% if user.is_authenticated %}
+
+            {% endif %}
+            <br> <a href="{% url 'edit_lector' lecturer_id=lector.lecturer_id %}">
+                    <button type="submit" class="btn btn-outline-primary">Редактировать</button>
+             </a>
+            <a href="{% url 'delete_lector' lecturer_id=lector.lecturer_id %}">
+                    <button type="submit" class="btn btn-outline-primary">Удалить</button>
+                </a>
+            <a href="{% url 'lector' %}">
+                    <button type="submit" class="btn btn-outline-primary">Вернуться к преподователям</button>
+                </a>
+
+        </p>
+    </div>
+{% endblock %}
