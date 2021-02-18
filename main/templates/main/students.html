@@ -1,0 +1,16 @@
+{%extends 'main/base.html'%}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content%}
+<h1> Список студентов  </h1>
+{% for student in students %}
+    <div>
+        <b>{{ student.first_name }} {{ student.last_name}}</b>,{{ student.email }}
+    </div>
+    {% endfor %}
+
+
+{% endblock %}
