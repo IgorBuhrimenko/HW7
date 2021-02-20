@@ -111,7 +111,7 @@ def edit_group(request, group_id):
     if request.method == 'POST':
         form = GroupForm(request.POST, instance=group)
         if form.is_valid():
-            group = form.save(commit=False)
+            group = form.save()
             group.save()
             return redirect('group')
     else:
