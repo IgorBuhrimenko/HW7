@@ -6,11 +6,13 @@
 
 {% block content%}
 <h1> Список студентов  </h1>
-{% for student in students %}
-    <div>
-        <b>{{ student.first_name }} {{ student.last_name}}</b>,{{ student.email }}
-    </div>
-    {% endfor %}
 
+ {% for student in students %}
+<li>
+            <a href="{% url 'show_student' student_id=student.student_id %}">
+                {{ student.last_name}}  {{student.first_name }}
+            </a>
+</li>
+    {% endfor %}
 
 {% endblock %}

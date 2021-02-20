@@ -1,0 +1,31 @@
+{%extends 'main/base.html'%}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content  %}
+Информация про студента
+  <div>
+        <p>
+            <br>Фамилия : {{ student.last_name }} </br>
+            <br>Имя : {{ student.first_name }}.</br>
+            <br> email : {{ student.email }} </br>
+            {% if user.is_authenticated %}
+
+            {% endif %}
+        </p>
+      <br> <a href="{% url 'edit_student' student_id=student.student_id %}">
+                    <button type="submit" class="btn btn-outline-primary">Редактировать</button>
+                </a>
+      <a href="{% url 'delete_students' student_id=student.student_id %}">
+                    <button type="submit" class="btn btn-outline-primary">Удалить</button>
+                </a>
+      <a href="{% url 'student' %}">
+                    <button type="submit" class="btn btn-outline-primary">Вернуться к студентам</button>
+                </a>
+
+
+
+    </div>
+{% endblock %}
