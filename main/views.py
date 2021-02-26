@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Lecturer, Student, Group
-from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm
+from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm, MessageForm
 
 
 def index(request):
@@ -122,5 +122,17 @@ def edit_group(request, group_id):
 def delete_group(request, group_id):
     Group.objects.filter(group_id=group_id).delete()
     return redirect('group')
+
+
+def send_message(request):
+    if request.method == 'POST':
+        form = MessageForm(data=request.POST)
+        if form.is_valid():
+            student = form.save(commit=False)
+            student.save()
+            return redirect('send_message')
+    else:
+        form = MessageForm()
+    return render(request, 'main/sendmessage.html', {'form': form})
 
 
