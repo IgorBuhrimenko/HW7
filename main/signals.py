@@ -1,6 +1,5 @@
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
-
 from .models import Student, Lecturer, Message
 from .tasks import send_email
 
@@ -19,5 +18,5 @@ def capitalize_lecturer(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Message)
 def send_notification(sender, instance, **kwargs):
-    send_email.delay(instance)
+    send_email.delay(instance.to_dict())
 

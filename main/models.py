@@ -36,5 +36,12 @@ class Message(models.Model):
     def __str__(self):
         return self.text_message
 
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'email': self.email,
+            'text': self.text_message
+        }
+
 
 # Create your models here.
