@@ -21,6 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ygb18+3&ip7g3bu%=j=%s8=*^z5&v8yw%$$%5%74yr^ar6%j*m'
+SENDGRID_KEY = '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'
+EMAIL_SENDER = 'mpashko@pm.me'
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'logger',
-    'silk'
+    'silk',
 ]
 
 MIDDLEWARE = [
