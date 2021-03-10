@@ -13,6 +13,6 @@ class LoggerMiddleware:
         response = self.get_response(request)
         diff = time.time() - start
         if not request.path.startswith('/admin/'):
-            log = Log(path=request.path, method=request.method, execution_time_sec=diff)
+            log = Log(path=request.path, method=request.method, execution_time_sec=round(diff, 4))
             log.save()
         return response

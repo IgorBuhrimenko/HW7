@@ -40,7 +40,7 @@ class Message(models.Model):
         return {
             'name': self.name,
             'email': self.email,
-            'text': self.text_message
+            'text_message': self.text_message
         }
 
 

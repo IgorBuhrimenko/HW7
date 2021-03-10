@@ -15,7 +15,13 @@ app.conf.beat_schedule = {
     'clear-log': {
         'task': 'main.tasks.clear_log',
         'schedule': crontab(hour=0, minute=0),
+
+    },
+    'get_exchange_rates': {
+        'task': 'exchanger.tasks.get_exchange_rates',
+        'schedule': crontab(minute='*/30'),
     }
 }
+
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()

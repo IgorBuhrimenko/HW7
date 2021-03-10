@@ -26,6 +26,8 @@ EMAIL_SENDER = 'mpashko@pm.me'
 
 CELERY_BROKER_URL = 'amqp://localhost'
 
+EXCHANGE_RATES_SOURCE = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +38,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'logger',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'logger',
     'silk',
+    'django_celery_beat',
+    'exchanger',
+
 ]
 
 MIDDLEWARE = [
