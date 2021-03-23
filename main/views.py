@@ -1,10 +1,17 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Lecturer, Student, Group
 from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm, MessageForm
+from exchanger.models import ExchangeRate
 
 
 def index(request):
-    return render(request, 'main/index.html', {'title': 'Главная страница сайта'})
+    exchange_rates = ExchangeRate.objects.all()
+    context = {
+        k: v for ex_rate in exchange_rates
+        for k, v in ex_rate.to_dict().items()
+    }
+    print(context)
+    return render(request, 'main/index.html', context)
 
 
 def show_student(request):
