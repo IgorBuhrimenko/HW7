@@ -6,6 +6,7 @@ class Student(models.Model):
     first_name = models.CharField('Имя студента', max_length=100)
     last_name = models.CharField('Фамилия студента', max_length=100)
     email = models.EmailField(max_length=250)
+    cover = models.ImageField(upload_to='covers/student_photo', default='covers/student_photo/default.png')
 
     def __str__(self):
         return self.last_name
@@ -16,6 +17,7 @@ class Lecturer(models.Model):
     first_name = models.CharField('Имя лектора', max_length=100)
     last_name = models.CharField('Фамилия лектора', max_length=100)
     email = models.EmailField(max_length=100)
+    cover = models.ImageField(upload_to='covers/lector_photo', default='covers/lector_photo/turtle.png')
 
     def __str__(self):
         return self.last_name
@@ -40,7 +42,7 @@ class Message(models.Model):
         return {
             'name': self.name,
             'email': self.email,
-            'text': self.text_message
+            'text_message': self.text_message
         }
 
 

@@ -1,4 +1,6 @@
 {%extends 'main/base.html'%}
+{%load static%}
+
 {% block title %}
 {{ title }}
 {% endblock %}
@@ -9,8 +11,9 @@
   <div>
         <p>
             <br>Фамилия : {{ student.last_name }} </br>
-            <br>Имя : {{ student.first_name }}.</br>
+            <br>Имя : {{ student.first_name }}</br>
             <br> email : {{ student.email }} </br>
+            <img class="cover" src="{{student.cover.url}}" >
             {% if user.is_authenticated %}
 
             {% endif %}

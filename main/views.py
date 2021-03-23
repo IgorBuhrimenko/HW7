@@ -3,6 +3,7 @@ from .models import Lecturer, Student, Group
 from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm, MessageForm
 
 
+
 def index(request):
     return render(request, 'main/index.html', {'title': 'Главная страница сайта'})
 
@@ -135,4 +136,7 @@ def send_message(request):
         form = MessageForm()
     return render(request, 'main/sendmessage.html', {'form': form})
 
+
+def tran(request):
+    return render(request, 'main/tran.html')
 

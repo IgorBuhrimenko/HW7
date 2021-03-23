@@ -1,7 +1,10 @@
 {%extends 'main/base.html'%}
+{%load static%}
+
 {% block title %}
 {{ title }}
 {% endblock %}
+
 
 
 {% block content  %}
@@ -11,7 +14,9 @@
             <br> Фамилия: {{ lector.last_name }} </br>
             <br>Имя : {{ lector.first_name }}.</br>
             <br> email : {{ lector.email }} </br>
+            <img class="cover" src="{{lector.cover.url}}">
             {% if user.is_authenticated %}
+
 
             {% endif %}
             <br> <a href="{% url 'edit_lector' lecturer_id=lector.lecturer_id %}">
