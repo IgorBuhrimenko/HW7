@@ -18,5 +18,9 @@
 
     {% endfor %}
 
+{% if user.is_superuser %}
+
 <a class="btn btn-outline-success my-2 my-sm-0" href="{%url 'create_group'%}">Создать групу</a>
+{% endif %}
+
 {% endblock %}

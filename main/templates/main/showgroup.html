@@ -15,10 +15,11 @@
                 <p><b>{{ student.first_name }} {{ student.last_name }} ({{ student.email }})</b>
             {%endfor%}
 
-            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
 
 
-            {% endif %}
+
+
         </p>
       <br> <a href="{% url 'edit_group' group_id=group.group_id %}">
       <button type="submit" class="btn btn-outline-primary">Редактировать</button></a>
@@ -28,5 +29,6 @@
       <a href="{% url 'group'  %}">
                     <button type="submit" class="btn btn-outline-primary">Вернуться к группам</button>
                 </a>
+      {% endif %}
     </div>
 {% endblock %}

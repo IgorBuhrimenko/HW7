@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.decorators.cache import cache_page
+
 from .models import Lecturer, Student, Group
 from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm, MessageForm
-
 
 
 def index(request):
@@ -71,6 +72,7 @@ def create_group(request):
     return render(request, 'main/addgroup.html', {'title': 'Добавить группу', 'form': form})
 
 
+@cache_page(60*5)
 def edit_student(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
     if request.method == 'POST':
@@ -89,6 +91,7 @@ def delete_students(requests, student_id):
     return redirect('student')
 
 
+@cache_page(60*5)
 def edit_lector(request, lecturer_id):
     lector = get_object_or_404(Lecturer, lecturer_id=lecturer_id)
     if request.method == 'POST':
@@ -107,6 +110,7 @@ def delete_lector(requests,lecturer_id):
     return redirect('lector')
 
 
+@cache_page(60*5)
 def edit_group(request, group_id):
     group = get_object_or_404(Group, group_id=group_id)
     if request.method == 'POST':

@@ -15,10 +15,11 @@
             <br>Имя : {{ lector.first_name }}.</br>
             <br> email : {{ lector.email }} </br>
             <img class="cover" src="{{lector.cover.url}}">
-            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
 
 
-            {% endif %}
+
+
             <br> <a href="{% url 'edit_lector' lecturer_id=lector.lecturer_id %}">
                     <button type="submit" class="btn btn-outline-primary">Редактировать</button>
              </a>
@@ -28,7 +29,7 @@
             <a href="{% url 'lector' %}">
                     <button type="submit" class="btn btn-outline-primary">Вернуться к преподователям</button>
                 </a>
-
+            {% endif %}
         </p>
     </div>
 {% endblock %}
