@@ -1,3 +1,5 @@
+from datetime import timedelta
+from .tasks import send_email
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.cache import cache_page
 
@@ -133,9 +135,23 @@ def send_message(request):
     if request.method == 'POST':
         form = MessageForm(data=request.POST)
         if form.is_valid():
-            student = form.save(commit=False)
-            student.save()
-            return redirect('send_message')
+            sent = request.session.get('sent')
+            if sent:
+                message = f"Sorry, please try again after{request.session.get_expiry_age()} seconds"
+                form = MessageForm()
+            else:
+                request.session.set_expiry(timedelta(seconds=180))
+                message = "Message sent"
+                send_email.delay(form.cleaned_data)
+                form = MessageForm()
+                request.session['sent'] = True
+                request.session.modified = True
+
+            return render(request, 'main/sendmessage.html', {'form': form,
+                                                            'message': message
+                                                            })
+        else:
+            return render(request, 'main/sendmessage.html', {'form': form})
     else:
         form = MessageForm()
     return render(request, 'main/sendmessage.html', {'form': form})
@@ -143,4 +159,7 @@ def send_message(request):
 
 def tran(request):
     return render(request, 'main/tran.html')
+
+
+
 
