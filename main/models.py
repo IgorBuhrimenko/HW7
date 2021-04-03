@@ -27,7 +27,7 @@ class Group(models.Model):
     group_id = models.AutoField(primary_key=True)
     course = models.CharField('Название предмета', max_length=100)
     students = models.ManyToManyField(Student)
-    teacher = models.OneToOneField(Lecturer, on_delete=models.CASCADE)
+    teacher = models.OneToOneField(Lecturer, on_delete=models.CASCADE, unique=False)
 
 
 class Message(models.Model):
