@@ -81,26 +81,23 @@ class GroupListViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        # cls.first_name = "Ivan"
-        # cls.last_name = "Ivanov"
-        # cls.email = "Ivava@sss.com"
-        # cls.course = 'Astronomy'
-        # for group_num in range(cls.NUMBER_GROUP):
-        #     group = Group.objects.create(course=cls.course)
-        #     for pr in range(cls.NUMBER_GROUP):
-        #         teacher = Lecturer.objects.create(
-        #             first_name=f'first name{pr}',
-        #             last_name=f'last name{pr}',
-        #             email=f'{pr}br@br.com',
-        #         )
-        #         group.teacher.add(teacher)
-        #     for num in range(cls.NUMBER_STUDENT):
-        #         student = Student.objects.create(first_name=cls.first_name,
-        #                                          last_name=cls.last_name,
-        #                                          email=cls.email,
-        #                                          )
-        #         group.students.add(student)
-      pass
+        cls.first_name = "Ivan"
+        cls.last_name = "Ivanov"
+        cls.email = "Ivava@sss.com"
+        cls.course = 'Astronomy'
+        for pr in range(cls.NUMBER_GROUP):
+                teacher = Lecturer.objects.create(
+                    first_name=f'first name{pr}',
+                    last_name=f'last name{pr}',
+                    email=f'{pr}br@br.com',
+                )
+                group = Group.objects.create(course=cls.course ,teacher=teacher)
+        for num in range(cls.NUMBER_STUDENT):
+            student = Student.objects.create(first_name=cls.first_name,
+                                             last_name=cls.last_name,
+                                             email=cls.email,
+                                                )
+            group.students.add(student)
 
     def test_view_groups_url_exists_at_desired_location(self):
         resp = self.client.get('/group')
@@ -109,7 +106,6 @@ class GroupListViewTest(TestCase):
     def test_view_groups_url_accessible_by_name(self):
         resp = self.client.get(reverse('group'))
         self.assertEqual(resp.status_code, 200)
-
 
     def test_view_uses_correct_template(self):
         resp = self.client.get(reverse('group'))
