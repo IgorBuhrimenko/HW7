@@ -120,11 +120,12 @@ def test_view_groups_url_accessible_by_name(client):
 
 
 @pytest.fixture
-def create_group():
-    def make_group(**kwargs):
+def create_groups():
+    def make_groups(**kwargs):
         numbers_of_group = kwargs['numbers_of_group']
         numbers_of_students = kwargs['numbers_of_students']
         course = 'Astonomy'
+        groups = []
         for number_group in range(numbers_of_group):
             teacher = Lecturer.objects.create(
                 first_name=f'first name {number_group}',
@@ -132,26 +133,35 @@ def create_group():
                 email=f'email{number_group}',
             )
             group = Group.objects.create(course=course, teacher=teacher)
-        for num_stud in range(numbers_of_students):
-            student =Student.objects.create(first_name='Max', last_name='Kevin', email='studentmail@cc.com')
-            group.students.add(student)
-    return make_group
+            for num_stud in range(numbers_of_students):
+                student = Student.objects.create(first_name='Max', last_name='Kevin', email='studentmail@cc.com')
+                group.students.add(student)
+            groups.append(group)
+        return groups
+    return make_groups
 
 
 @pytest.mark.django_db
-def test_lists_all_group(client, create_group):
+def test_lists_all_group(client, create_groups):
     numbers_of_group = 10
     numbers_of_students = 10
 
-    create_group(numbers_of_group=numbers_of_group, numbers_of_students=numbers_of_students)
+    create_groups(numbers_of_group=numbers_of_group, numbers_of_students=numbers_of_students)
     resp = client.get(reverse('group'))
     assert resp.status_code == 200
     assert len(resp.context['groups']) == numbers_of_group
 
 
 @pytest.mark.django_db
-def test_show_group(client, create_group):
-    print(create_group(numbers_of_group=1, numbers_of_students=3))
+def test_group_show(client, create_groups):
+    numbers_of_group = 10
+    numbers_of_students = 10
+    groups = create_groups(numbers_of_group=numbers_of_group, numbers_of_students=numbers_of_students)
+    group = groups[0]
+    assert group.teacher, group.course is not None
+    resp = client.get(reverse('show_group', kwargs={'group_id': group.group_id}))
+    assert resp.status_code == 200
+
 
 
 
