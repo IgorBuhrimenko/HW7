@@ -41,6 +41,7 @@ numpy==1.20.2
 packaging==20.9
 Pillow==8.1.2
 pipdeptree==2.0.0
+psycopg2==2.8.6
 pipenv==2020.8.13
 pluggy==0.13.1
 prompt-toolkit==3.0.17
@@ -48,7 +49,7 @@ py==1.10.0
 pycodestyle==2.6.0
 pycosat==0.6.3
 pyflakes==2.2.0
-Pygments==2.8.0.
+Pygments==2.8.0.dev20210403
 pyparsing==2.4.7
 pytest==6.2.2
 pytest-django==4.1.0
