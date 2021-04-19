@@ -35,10 +35,8 @@ idna==2.10
 iniconfig==1.1.1
 Jinja2==2.11.3
 kombu==5.0.2
-Markdown @ file:///buildstream/freedesktop-sdk/components/python3-markdown.bst
 MarkupSafe==1.1.1
 mccabe==0.6.1
-meson @ file:///buildstream/freedesktop-sdk/components/meson.bst
 numpy==1.20.2
 packaging==20.9
 Pillow==8.1.2
