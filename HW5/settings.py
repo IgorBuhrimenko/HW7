@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'exchanger',
     'djrichtextfield',
+    'users',
 
 ]
 
@@ -149,3 +150,5 @@ CACHES = {
 LOGIN_REDIRECT_URL = '/'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
