@@ -49,7 +49,7 @@ py==1.10.0
 pycodestyle==2.6.0
 pycosat==0.6.3
 pyflakes==2.2.0
-Pygments==2.8.0.dev20210403
+Pygments==2.8.0
 pyparsing==2.4.7
 pytest==6.2.2
 pytest-django==4.1.0
