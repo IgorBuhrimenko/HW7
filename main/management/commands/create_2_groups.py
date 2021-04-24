@@ -12,9 +12,7 @@ class Command(BaseCommand):
         number_of_students = 10
         number_of_groups = 2
 
-
         for i in range(number_of_groups):
-
 
             lecturer = Lecturer.objects.create(first_name=fake.unique.first_name(),
                                                last_name=fake.unique.last_name(),
@@ -22,7 +20,6 @@ class Command(BaseCommand):
             lecturer.save()
 
             group = Group.objects.create(course=fake.job(), teacher=lecturer)
-
 
             for j in range(number_of_students):
                 student = Student.objects.create(first_name=fake.unique.first_name(),

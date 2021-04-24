@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content%}
-<h1> Преподователи  </h1>
+<h1> Lecturer  </h1>
 
  {% for lecturer in lecturers %}
 <li>
@@ -16,7 +16,7 @@
     {% endfor %}
 
 {% if user.is_superuser %}
-<a class="btn btn-outline-success my-2 my-sm-0" href="{%url 'create_lector'%}">Create Lector</a>
+<a class="btn btn-outline-success my-2 my-sm-0" href="{%url 'create_lecturer'%}">Create Lector</a>
 
 {% endif %}
 

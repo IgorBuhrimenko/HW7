@@ -22,11 +22,14 @@ from django.urls import include, path
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path(r'^silk/', include('silk.urls', namespace='silk')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('users/', include('users.urls')),
 ]
+
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

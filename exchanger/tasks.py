@@ -2,7 +2,7 @@ import requests
 
 from celery import shared_task
 
-from HW7.HW5.settings import EXCHANGE_RATES_SOURCE
+from HW5.settings import EXCHANGE_RATES_SOURCE
 from .models import ExchangeRate
 
 CURRENCY_MAP = ["USD", "EUR", "RUR", "UAH"]
