@@ -24,7 +24,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    url(r'^silk/', include('silk.urls', namespace='silk')),
+    path(r'^silk/', include('silk.urls', namespace='silk')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

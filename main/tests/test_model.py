@@ -104,7 +104,7 @@ class GroupModelsTest(TestCase):
         course_name = 'a '*1000
         group = Group.objects.create(course=course_name, teacher=self.teacher)
         expected_message = 'Убедитесь, что это значение содержит не более 100 символов (сейчас 2000).'
-        with self.assertRaisesMessage(ValidationError,expected_message):
+        with self.assertRaisesMessage(ValidationError, expected_message):
             group.full_clean()
 
 

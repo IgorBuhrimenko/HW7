@@ -132,3 +132,4 @@ dmypy.json
 .pyre/
 sendgrid.env
 /media
+pytest.ini

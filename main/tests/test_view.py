@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.conf import settings
 from django.urls import reverse
+import pytest
+
 
 from main.models import Student, Lecturer, Group
 
@@ -21,11 +23,11 @@ class StudentViewTest(TestCase):
                 email=cls.email
             )
 
-    def test_view_lecturers_url_exists_at_desired_location(self):
+    def test_view_student_url_exists_at_desired_location(self):
         resp = self.client.get('/student')
         self.assertEqual(resp.status_code, 200)
 
-    def test_view_lecturers_url_accessible_by_name(self):
+    def test_view_student_url_accessible_by_name(self):
         resp = self.client.get(reverse('student'))
         self.assertEqual(resp.status_code, 200)
 
@@ -111,6 +113,5 @@ class GroupListViewTest(TestCase):
         resp = self.client.get(reverse('group'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'main/group.html')
-
 
 
