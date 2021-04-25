@@ -18,14 +18,13 @@
 
         </p>
             {% if user.is_superuser %}
-
-      <br> <a href="{% url 'edit_student' student_id=student.student_id %}">
+              <a href="{% url 'edit_student' pk=student.student_id %}">
                     <button type="submit" class="btn btn-outline-primary">Редактировать</button>
                 </a>
-      <a href="{% url 'delete_students' student_id=student.student_id %}">
+              <a href="{% url 'delete_students' pk=student.student_id %}">
                     <button type="submit" class="btn btn-outline-primary">Удалить</button>
                 </a>
-      <a href="{% url 'student' %}">
+              <a href="{% url 'student' %}">
                     <button type="submit" class="btn btn-outline-primary">Вернуться к студентам</button>
                 </a>
       {% endif %}

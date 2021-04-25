@@ -1,8 +1,13 @@
 from datetime import timedelta
-from .tasks import send_email
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView , DeleteView
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.cache import cache_page
 
+
+from .tasks import send_email
 from .models import Lecturer, Student, Group
 from .forms import addstudent, addlector, addgroup, StudentForm, LectorForm, GroupForm, MessageForm
 
@@ -16,6 +21,7 @@ def show_student(request):
     return render(request, 'main/students.html', {'title': 'Студенты', 'students': students})
 
 
+@cache_page(60*5)
 def shows_students(request, student_id):
     student = get_object_or_404(Student, student_id=student_id)
     return render(request, 'main/showstudent.html', {'student': student})
@@ -26,6 +32,7 @@ def show_lector(request):
     return render(request, 'main/lector.html', {'title': 'Преподователи', 'lecturers': lecturers})
 
 
+@cache_page(60*5)
 def shows_lectors(request, lecturer_id):
     lector = get_object_or_404(Lecturer, lecturer_id=lecturer_id)
     return render(request, 'main/showlector.html', {'lector': lector})
@@ -36,6 +43,7 @@ def show_group(request):
     return render(request, 'main/group.html', {'title': 'Курсы', 'groups': groups})
 
 
+@cache_page(60*5)
 def shows_groups(request, group_id):
     group = get_object_or_404(Group, group_id=group_id)
     return render(request, 'main/showgroup.html', {'group': group})
@@ -74,20 +82,6 @@ def create_group(request):
     return render(request, 'main/addgroup.html', {'title': 'Добавить группу', 'form': form})
 
 
-@cache_page(60*5)
-def edit_student(request, student_id):
-    student = get_object_or_404(Student, student_id=student_id)
-    if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
-        if form.is_valid():
-            student = form.save(commit=False)
-            student.save()
-            return redirect('student')
-    else:
-        form = StudentForm(instance=student)
-    return render(request, 'main/editstudent.html', {'form': form})
-
-
 def delete_students(requests, student_id):
     Student.objects.filter(student_id=student_id).delete()
     return redirect('student')
@@ -107,7 +101,7 @@ def edit_lector(request, lecturer_id):
     return render(request, 'main/editlector.html', {'form': form})
 
 
-def delete_lector(requests,lecturer_id):
+def delete_lector(requests, lecturer_id):
     Lecturer.objects.filter(lecturer_id=lecturer_id).delete()
     return redirect('lector')
 
@@ -157,8 +151,44 @@ def send_message(request):
     return render(request, 'main/sendmessage.html', {'form': form})
 
 
-def tran(request):
-    return render(request, 'main/tran.html')
+class StudentCreateView(LoginRequiredMixin, CreateView):
+    model = Student
+    template_name = 'main/create_student.html'
+    fields = ['first_name', 'last_name', 'email', 'cover']
+
+
+class StudentEditView(LoginRequiredMixin, UpdateView):
+    model = Student
+    template_name = 'main/edit_student.html'
+    fields = ['first_name', 'last_name', 'email', 'cover']
+
+
+class StudentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Student
+    template_name = 'main/delete_student.html'
+    success_url = reverse_lazy('index')
+
+
+class LecturerCreateView(LoginRequiredMixin, CreateView):
+    model = Lecturer
+    template_name = 'main/create_lecturer.html'
+    fields = ['first_name', 'last_name', 'email', 'cover']
+
+
+class LecturerEditView(LoginRequiredMixin, UpdateView):
+    model = Lecturer
+    template_name = 'main/edit_lector.html'
+    fields = ['first_name', 'last_name', 'email', 'cover']
+
+
+class LecturerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Lecturer
+    template_name = 'main/delete_student.html'
+    success_url = reverse_lazy('index')
+
+
+
+
 
 
 

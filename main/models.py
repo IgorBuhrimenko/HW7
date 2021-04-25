@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Student(models.Model):
@@ -11,6 +12,9 @@ class Student(models.Model):
     def __str__(self):
         return self.last_name
 
+    def get_absolute_url(self):
+        return reverse('show_student', kwargs={'student_id': self.student_id})
+
 
 class Lecturer(models.Model):
     lecturer_id = models.AutoField(primary_key=True)
@@ -22,9 +26,12 @@ class Lecturer(models.Model):
     def __str__(self):
         return self.last_name
 
+    def get_absolute_url(self):
+        return reverse('show_lector', kwargs={'lecturer_id': self.lecturer_id})
+
 
 class Group(models.Model):
-    group_id = models.AutoField(primary_key=True)
+    group_id = models.AutoField(primary_key=True )
     course = models.CharField('Название предмета', max_length=100)
     students = models.ManyToManyField(Student)
     teacher = models.OneToOneField(Lecturer, on_delete=models.CASCADE, unique=False)
@@ -44,6 +51,5 @@ class Message(models.Model):
             'email': self.email,
             'text_message': self.text_message
         }
-
 
 # Create your models here.
